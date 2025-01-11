@@ -31,7 +31,7 @@ func main() {
 
 	<-done
 
-	slog.Info("stopping server")
+	slog.Info("server stopping...")
 
 	a.Srv.Stop(ctx)
 

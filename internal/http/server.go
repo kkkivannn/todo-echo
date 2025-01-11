@@ -19,9 +19,7 @@ func New(e *echo.Echo, host string, port int) *Server {
 
 func (s *Server) MustRun() {
 	host := fmt.Sprintf("%s:%d", s.host, s.port)
-	if err := s.e.Start(host); err != nil {
-		panic(err)
-	}
+	s.e.Logger.Fatal(s.e.Start(host))
 }
 
 func (s *Server) Stop(ctx context.Context) {

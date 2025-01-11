@@ -12,8 +12,8 @@ import (
 func main() {
 	var storagePath, migrationsPath, migrationsTable string
 
-	flag.StringVar(&storagePath, "storage-path", "", "Path to a directory containing migration files")
-	flag.StringVar(&migrationsPath, "migrations-path", "", "Path to a directory containing migration files")
+	flag.StringVar(&storagePath, "storage-path", "./storage/tick-task.db", "Path to a directory containing migration files")
+	flag.StringVar(&migrationsPath, "migrations-path", "./migrations", "Path to a directory containing migration files")
 	flag.StringVar(&migrationsTable, "migrations-table", "migrations", "Path to a table containing migration files")
 	flag.Parse()
 

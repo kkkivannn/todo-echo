@@ -1,11 +1,13 @@
 package app
 
 import (
-	"github.com/labstack/echo/v4"
 	"todo_echo/internal/config"
 	"todo_echo/internal/handlers"
 	"todo_echo/internal/http"
+	"todo_echo/internal/services"
 	storage "todo_echo/internal/storage/sqlite"
+
+	"github.com/labstack/echo/v4"
 )
 
 type App struct {
@@ -18,9 +20,14 @@ func New(cfg *config.Config) *App {
 
 	srv := http.New(e, cfg.Host, cfg.Port)
 
-	s := storage.New(cfg.DBString)
+	s, err := storage.New(cfg.DBString)
+	if err != nil {
+		panic(err)
+	}
 
-	h := handlers.New(e, s)
+	taskService := services.New(s)
+
+	h := handlers.New(e, taskService)
 
 	h.SetupRoutes()
 
